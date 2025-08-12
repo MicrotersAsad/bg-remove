@@ -1,5 +1,5 @@
 from flask import Flask, request, send_file
-import backgroundremover as br
+from rembg import remove
 from io import BytesIO
 
 app = Flask(__name__)
@@ -11,12 +11,12 @@ def remove_background():
 
     image_file = request.files['image']
 
-    # Process image using backgroundremover
-    output_image = br.remove(image_file)
+    # Process image using rembg
+    input_image = image_file.read()
+    output_image = remove(input_image)
 
     # Convert the image to a BytesIO object so that it can be returned in the response
-    img_io = BytesIO()
-    output_image.save(img_io, 'PNG')
+    img_io = BytesIO(output_image)
     img_io.seek(0)
 
     return send_file(img_io, mimetype='image/png')
