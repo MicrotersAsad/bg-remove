@@ -1,2 +1,2 @@
 Flask==2.0.1
-backgroundremover==0.0.1
+backgroundremover==0.3.4  # সর্বশেষ সংস্করণ
